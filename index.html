@@ -1,72 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-100 text-gray-800">
+<html lang="en" class="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Malawi Info API</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class'],
+    } 
+  </script>
 </head>
-<body class="font-sans antialiased">
-
+<body class="font-sans antialiased bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors">
   <div class="max-w-4xl mx-auto px-4 py-10">
-    <h1 class="text-4xl font-bold mb-2 text-blue-700">Malawi Info API</h1>
-    <p class="text-lg mb-6">Explore structured data about Malawi’s districts, agriculture, currency exchange etc. Built with Django microservices and YAML.</p>
-
-    <div class="space-y-8">
-
-      <!-- MWINFO Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-green-700 mb-2">Districts (mwinfo)</h2>
-        <ul class="space-y-2">
-          <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/mwinfo/districts/</code> — List all districts</li>
-          <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/mwinfo/districts/Lilongwe/</code> — Info about Lilongwe</li>
-        </ul>
-      </section>
-
-      <!-- AGRIINFO Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-yellow-700 mb-2">Agriculture & Fish (agriinfo)</h2>
-        <ul class="space-y-2">
-          <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/agriinfo/query/?name=Nsima</code> — Search crop/fish by name</li>
-        </ul>
-      </section>
-
-      <!-- CURRENCY Section -->
-      <section>
-        <h2 class="text-2xl font-semibold text-indigo-700 mb-2">Currency Exchange</h2>
-        <ul class="space-y-2">
-          <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/currency/to_foreign/?amount=10000&currency=USD</code> — Convert MWK to USD</li>
-          <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/currency/to_mwk/?amount=100&currency=GBP</code> — Convert GBP to MWK</li>
-        </ul>
-      </section>
-
-      <!-- Usage Examples -->
-      <section>
-        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Example Usage</h2>
-        <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
-     https://mw-info-api-5.onrender.com/api/mwinfo/districts/
-     https://mw-info-api-5.onrender.com/api/agriinfo/query/?name=Maize
-     https://mw-info-api-5.onrender.com/api/currency/to_foreign/?amount=10000&currency=USD
-        </pre> 
-      </section>
-
-      <!-- Maintainer -->
-      <section>
-        <h2 class="text-2xl font-semibold text-gray-700 mb-2"> Maintainer</h2>
-        <p class="text-sm mb-1">Built & maintained by <strong>Tuntufye Mwanyongo</strong></p>
-        <p class="text-sm">
-          <a href="mailto:tuntufye@gmail.com" class="text-blue-600 underline mr-4">📧 Email</a>
-          <a href="https://github.com/Tuntufye4" target="_blank" class="text-gray-800 hover:text-black flex items-center space-x-1">
-            <svg class="w-5 h-5 fill-current text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-              <path d="M12 0C5.37 0 0 5.373 0 12a12 12 0 008.208 11.385c.6.112.82-.26.82-.577v-2.026c-3.338.727-4.033-1.614-4.033-1.614-.546-1.385-1.334-1.753-1.334-1.753-1.09-.745.083-.73.083-.73 1.204.085 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.996.108-.776.418-1.305.76-1.605-2.665-.305-5.467-1.332-5.467-5.93 0-1.31.468-2.38 1.235-3.22-.124-.305-.535-1.533.117-3.194 0 0 1.008-.322 3.3 1.23A11.512 11.512 0 0112 6.844a11.52 11.52 0 012.994.404c2.29-1.552 3.296-1.23 3.296-1.23.653 1.661.242 2.89.119 3.194.77.84 1.233 1.91 1.233 3.22 0 4.61-2.807 5.624-5.479 5.921.43.37.813 1.1.813 2.219v3.293c0 .32.218.694.825.576A12.004 12.004 0 0024 12c0-6.627-5.373-12-12-12z"/>
-            </svg>
-            <span>GitHub</span>
-          </a>
-        </p>
-      </section>
-
+    <div class="flex justify-between items-center mb-6">
+      <h1 class="text-4xl font-bold text-blue-700 dark:text-blue-300">Malawi Info API</h1>
+      <button id="themeToggle" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded">
+        Toggle Dark Mode
+      </button>
     </div>
+    <p class="text-lg mb-8">Explore Malawi’s districts, agriculture, and currency endpoints live!</p>
+
+    <!-- Interactive Endpoint Section -->
+    <section>
+      <h2 class="text-2xl font-semibold mb-4">Interactive Test</h2>
+      <label class="block mb-2">Endpoint:</label>
+      <input id="endpoint" type="text" value="https://mw-info-api-5.onrender.com/api/mwinfo/districts/" class="w-full mb-4 p-2 border rounded bg-white dark:bg-gray-800">
+      <button id="runBtn" class="px-4 py-2 bg-blue-600 text-white rounded">Run</button>
+      <button id="copyBtn" class="px-4 py-2 bg-gray-500 text-white rounded ml-2">Copy</button>
+
+      <pre id="response" class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded whitespace-pre-wrap overflow-auto text-sm"></pre>
+    </section>
+
+    <!-- API Info -->
+    <div class="space-y-8 mt-10">
+      <section>
+        <h2 class="text-2xl font-semibold text-green-700 dark:text-green-300 mb-2">📌 Districts</h2>
+        <ul class="space-y-2">
+          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/mwinfo/districts/</code></li>
+          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/mwinfo/districts/Lilongwe/</code></li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="text-2xl font-semibold text-yellow-700 dark:text-yellow-300 mb-2">Agriculture & Fish</h2>
+        <ul>
+          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/agriinfo/query/?name=Nsima</code></li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="text-2xl font-semibold text-indigo-700 dark:text-indigo-300 mb-2">Currency Exchange</h2>
+        <ul>
+          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/currency/to_foreign/?amount=10000&currency=USD</code></li>
+          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/currency/to_mwk/?amount=100&currency=GBP</code></li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- Maintainer Info -->
+    <footer class="mt-12 text-sm text-gray-600 dark:text-gray-400">
+      <p>Built & maintained by <strong>Tuntufye Mwanyongo</strong></p>
+      <a href="mailto:tuntufye@gmail.com" class="text-blue-500 dark:text-blue-300 underline">📧 Email</a>
+      <a href="https://github.com/Tuntufye4" target="_blank" class="inline-flex items-center ml-4 text-gray-700 dark:text-gray-300 hover:text-black">
+        <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="…"/></svg> GitHub
+      </a>
+    </footer>
   </div>
 
+  <script>
+    const runBtn = document.getElementById('runBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const endpointInput = document.getElementById('endpoint');
+    const responseEl = document.getElementById('response');
+    const themeBtn = document.getElementById('themeToggle');
+
+    runBtn.addEventListener('click', async () => {
+      const url = endpointInput.value;
+      try {
+        responseEl.textContent = 'Loading...';
+        const res = await fetch(url);
+        const data = await res.json();
+        responseEl.textContent = JSON.stringify(data, null, 2);
+      } catch (e) {
+        responseEl.textContent = 'Error: ' + e;
+      }
+    });
+
+    copyBtn.addEventListener('click', () => {
+      endpointInput.select();
+      document.execCommand('copy');
+      alert('Copied!');
+    });
+
+    themeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      document.documentElement.classList.toggle('light');
+    });
+  </script>
 </body>
 </html>
