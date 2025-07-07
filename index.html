@@ -9,14 +9,14 @@
 <body class="font-sans antialiased">
 
   <div class="max-w-4xl mx-auto px-4 py-10">
-    <h1 class="text-4xl font-bold mb-2 text-blue-700">🌍 Malawi Info API</h1>
-    <p class="text-lg mb-6">Explore structured data about Malawi’s districts, agriculture, and currency exchange. Built with Django microservices and YAML.</p>
+    <h1 class="text-4xl font-bold mb-2 text-blue-700">Malawi Info API</h1>
+    <p class="text-lg mb-6">Explore structured data about Malawi’s districts, agriculture, currency exchange etc. Built with Django microservices and YAML.</p>
 
     <div class="space-y-8">
 
       <!-- MWINFO Section -->
       <section>
-        <h2 class="text-2xl font-semibold text-green-700 mb-2">📌 Districts (mwinfo)</h2>
+        <h2 class="text-2xl font-semibold text-green-700 mb-2">Districts (mwinfo)</h2>
         <ul class="space-y-2">
           <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/mwinfo/districts/</code> — List all districts</li>
           <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/mwinfo/districts/Lilongwe/</code> — Info about Lilongwe</li>
@@ -25,7 +25,7 @@
 
       <!-- AGRIINFO Section -->
       <section>
-        <h2 class="text-2xl font-semibold text-yellow-700 mb-2">🌾 Agriculture & Fish (agriinfo)</h2>
+        <h2 class="text-2xl font-semibold text-yellow-700 mb-2">Agriculture & Fish (agriinfo)</h2>
         <ul class="space-y-2">
           <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/agriinfo/query/?name=Nsima</code> — Search crop/fish by name</li>
         </ul>
@@ -33,7 +33,7 @@
 
       <!-- CURRENCY Section -->
       <section>
-        <h2 class="text-2xl font-semibold text-indigo-700 mb-2">💱 Currency Exchange</h2>
+        <h2 class="text-2xl font-semibold text-indigo-700 mb-2">Currency Exchange</h2>
         <ul class="space-y-2">
           <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/currency/to_foreign/?amount=10000&currency=USD</code> — Convert MWK to USD</li>
           <li><code class="bg-gray-200 px-2 py-1 rounded">GET /api/currency/to_mwk/?amount=100&currency=GBP</code> — Convert GBP to MWK</li>
@@ -42,11 +42,11 @@
 
       <!-- Usage Examples -->
       <section>
-        <h2 class="text-2xl font-semibold text-gray-700 mb-2">🧪 Example Usage</h2>
+        <h2 class="text-2xl font-semibold text-gray-700 mb-2">Example Usage</h2>
         <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto">
-curl https://mw-info-api-5.onrender.com/api/mwinfo/districts/
-curl https://mw-info-api-5.onrender.com/api/agriinfo/query/?name=Maize
-curl https://mw-info-api-5.onrender.com/api/currency/to_foreign/?amount=10000&currency=USD
+     https://mw-info-api-5.onrender.com/api/mwinfo/districts/
+     https://mw-info-api-5.onrender.com/api/agriinfo/query/?name=Maize
+     https://mw-info-api-5.onrender.com/api/currency/to_foreign/?amount=10000&currency=USD
         </pre>
       </section>
 
