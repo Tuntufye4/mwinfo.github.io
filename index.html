@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
-  <meta charset="UTF-8" />   
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Malawi Info</title>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,23 +17,29 @@
     </div>
   </div>
 
-  <!-- Header -->
-  <header class="bg-black-600 text-white px-6 py-4">  
+  <!-- Header (Now Gray) -->
+  <header class="bg-gray-800 text-white px-6 py-4">
     <div class="max-w-4xl mx-auto flex justify-between items-center">
-      <h1 class="text-2xl font-bold">Malawi Info</h1>  
+      <h1 class="text-2xl font-bold">Malawi Info</h1>
       <nav class="space-x-4">
-        <button onclick="showSection('home')" class="nav-btn">Home</button>
+        <button onclick="showSection('welcome')" class="nav-btn">Home</button>
         <button onclick="showSection('api')" class="nav-btn">API</button>
         <button onclick="showSection('library')" class="nav-btn">Library</button>
-        <button id="themeToggle" class="ml-6 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-gray-800 dark:text-gray-200">Toggle Dark Mode</button>
       </nav>
     </div>
   </header>
 
   <!-- Main Content -->
   <main id="mainContent" class="max-w-4xl mx-auto px-4 py-10 space-y-16 min-h-[60vh]">
-    <!-- Loaded dynamically -->
+    <!-- Section content loads here -->
   </main>
+
+  <!-- Dark Mode Toggle Below Main -->
+  <div class="text-center mb-6">
+    <button id="themeToggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded">
+      Toggle Dark Mode
+    </button>
+  </div>
 
   <!-- Footer -->
   <footer class="text-center text-sm text-gray-500 py-10">
