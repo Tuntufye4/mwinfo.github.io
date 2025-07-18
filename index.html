@@ -1,158 +1,47 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8" />   
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Malawi Info API</title>
+  <title>Malawi Info</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: ['class'],
-      theme: {
-        extend: {
-          animation: {
-            'fade-out': 'fadeOut 1s ease-in-out forwards',
-          },
-          keyframes: {
-            fadeOut: {
-              '0%': { opacity: '1' },
-              '100%': { opacity: '0', visibility: 'hidden' }
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    .perspective-3d {
-      transform: perspective(1000px);
-    }
-  </style>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-<body class="font-sans antialiased bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors">
+<body class="font-sans antialiased bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors">
 
   <!-- Splash Screen -->
-  <div id="splashScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 text-white">
+  <div id="splashScreen" class="splash-screen">
     <div class="text-center perspective-3d">
-      <h1 class="text-6xl font-extrabold tracking-widest">INFO-MW</h1>
-      <p class="mt-4 text-lg">Loading Malawi insights...</p>
+      <h1 class="text-6xl font-extrabold tracking-widest text-black">INFO-MW</h1>
+      <p class="mt-4 text-lg text-gray-600">Loading...</p>
     </div>
   </div>
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white px-6 py-4">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Malawi Info</h1>
+      <nav class="space-x-4">
+        <button onclick="showSection('welcome')" class="nav-btn">Welcome</button>
+        <button onclick="showSection('api')" class="nav-btn">API</button>
+        <button onclick="showSection('library')" class="nav-btn">Library</button>
+        <button id="themeToggle" class="ml-6 px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded text-gray-800 dark:text-gray-200">Toggle Dark Mode</button>
+      </nav>
+    </div>
+  </header>
 
   <!-- Main Content -->
-  <div class="max-w-4xl mx-auto px-4 py-10">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-4xl font-bold text-blue-700 dark:text-blue-300">Malawi Info API</h1>
-      <button id="themeToggle" class="px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded">
-        Toggle Dark Mode
-      </button>
-    </div>
-    <p class="text-lg mb-8">Explore Malawi’s info endpoints live!</p>  
+  <main id="mainContent" class="max-w-4xl mx-auto px-4 py-10 space-y-16 min-h-[60vh]">
+    <!-- Loaded dynamically -->
+  </main>
 
-    <!-- Interactive Endpoint Section -->
-    <section>
-      <h2 class="text-2xl font-semibold mb-4">Interactive Test</h2>
-      <label class="block mb-2">Endpoint:</label>
-      <input id="endpoint" type="text" value="https://mw-info-api-5.onrender.com/api/mwinfo/districts/" class="w-full mb-4 p-2 border rounded bg-white dark:bg-gray-800">
-      <button id="runBtn" class="px-4 py-2 bg-blue-600 text-white rounded">Run</button>
-      <button id="copyBtn" class="px-4 py-2 bg-gray-500 text-white rounded ml-2">Copy</button>
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 py-10">
+    Built & maintained by <strong>Tuntufye Mwanyongo</strong> |
+    <a href="mailto:tuntufye@gmail.com" class="underline text-blue-500">📧 Email</a> |
+    <a href="https://github.com/Tuntufye4" target="_blank" class="underline text-blue-500">GitHub</a>
+  </footer>
 
-      <pre id="response" class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded whitespace-pre-wrap overflow-auto text-sm"></pre>
-    </section>
-
-    <!-- API Info -->
-    <div class="space-y-8 mt-10">
-      <section>
-        <h2 class="text-2xl font-semibold text-green-700 dark:text-green-300 mb-2">Districts</h2>
-        <ul class="space-y-2">
-          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/mwinfo/districts/</code></li>
-          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/mwinfo/districts/Lilongwe/</code></li>
-        </ul>
-      </section>
-      <section>
-        <h2 class="text-2xl font-semibold text-yellow-700 dark:text-yellow-300 mb-2">Agriculture</h2>
-        <ul>
-          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/agriinfo/query/?name=Nsima</code></li>
-        </ul>
-      </section>
-      <section>
-        <h2 class="text-2xl font-semibold text-indigo-700 dark:text-indigo-300 mb-2">Currency Exchange</h2>
-        <ul>
-          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/currency/to_foreign/?amount=10000&currency=USD</code></li>
-          <li><code class="px-2 py-1 bg-gray-200 dark:bg-gray-700 rounded">GET /api/currency/to_mwk/?amount=100&currency=GBP</code></li>
-        </ul>
-      </section>
-    </div>
-
-    <!-- Maintainer Info -->
-    <footer class="mt-12 text-sm text-gray-600 dark:text-gray-400">
-      <p>Built & maintained by <strong>Tuntufye Mwanyongo</strong></p>
-      <a href="mailto:tuntufye@gmail.com" class="text-blue-500 dark:text-blue-300 underline">📧 Email</a>
-      <a href="https://github.com/Tuntufye4" target="_blank" class="inline-flex items-center ml-4 text-gray-700 dark:text-gray-300 hover:text-black">
-        <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="..." /></svg> GitHub
-      </a>
-    </footer>
-  </div>
-
-  <!-- JavaScript -->
-  <script>
-    const runBtn = document.getElementById('runBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const endpointInput = document.getElementById('endpoint');
-    const responseEl = document.getElementById('response');
-    const themeBtn = document.getElementById('themeToggle');
-
-    runBtn.addEventListener('click', async () => {
-      const url = endpointInput.value;
-      try {
-        responseEl.textContent = 'Loading...';
-        const res = await fetch(url, {
-          method: 'GET',
-          mode: 'cors'
-        });
-
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-        }
-
-        const contentType = res.headers.get("content-type");
-        if (contentType && contentType.includes("application/json")) {
-          const data = await res.json();
-          responseEl.textContent = JSON.stringify(data, null, 2);
-        } else {
-          const text = await res.text();
-          responseEl.textContent = text;
-        }
-
-      } catch (e) {
-        console.error(e);
-        responseEl.textContent = 'Fetch Error: ' + e.message;
-      }
-    });
-
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(endpointInput.value);
-        alert('Copied!');
-      } catch (err) {
-        alert('Failed to copy');
-      }
-    });
-
-    themeBtn.addEventListener('click', () => {
-      document.documentElement.classList.toggle('dark');
-      document.documentElement.classList.toggle('light');
-      localStorage.setItem('theme',
-        document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-      );
-    });
-
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        const splash = document.getElementById('splashScreen');
-        splash.classList.add('animate-fade-out');
-      }, 2000);
-    });
-  </script>
+  <script src="assets/script.js"></script>
 </body>
 </html>

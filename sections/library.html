@@ -1,0 +1,89 @@
+<section class="prose max-w-none dark:prose-invert">
+  <h2 class="text-3xl font-bold text-purple-700 dark:text-purple-300 mb-6">mw-info Python Library</h2>
+
+  <p>
+    A lightweight Python library to access structured information about Malawi’s districts, agriculture, currency exchange rates, health facilities, and demographics.
+  </p>
+
+  <h3 class="mt-8 mb-4">Features</h3>
+  <ul class="list-disc list-inside">
+    <li>✔ District-level insights: Region, coordinates, population, climate, timezone, elevation, and more</li>
+    <li>✔ Currency conversion: Convert between MWK and major currencies (USD, EUR, ZAR, etc.)</li>
+    <li>✔ Agricultural info: Query crops and fish species using Chichewa, English, or scientific names</li>
+    <li>✔ Health data: Get health facility counts (hospitals, clinics, health posts) by district</li>
+    <li>✔ Demographics: Population totals, gender ratios, age distribution, and urban/rural splits</li>
+  </ul>
+
+  <h3 class="mt-8 mb-2">Installation</h3>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded"><code>pip install mw-info</code></pre>
+  <p>or for development:</p>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded whitespace-pre-wrap">
+git clone https://github.com/Tuntufye4/mw_info.git
+cd mw_info
+pip install -e .
+  </pre>
+
+  <h3 class="mt-8 mb-4">Usage</h3>
+
+  <h4 class="font-semibold mt-4">DistrictInfo Class</h4>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>from mw_info.district import DistrictInfo
+
+districts = DistrictInfo()
+all_districts = districts.get_all_districts()
+print(all_districts)
+# Output: ['Lilongwe', 'Blantyre', 'Machinga', ...]
+  </code></pre>
+
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>info = districts.get_district_info("Lilongwe")
+print(info)
+selected = districts.get_district_info("Mangochi", fields=["population_2023", "languages", "climate"])
+print(selected)
+  </code></pre>
+
+  <h4 class="font-semibold mt-6">CurrencyConverter Class</h4>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>from mw_info.currency import CurrencyConverter
+
+currency = CurrencyConverter()
+print(currency.available_currencies())
+mwk_amount = 10000
+usd_amount = currency.convert_from_base(mwk_amount, "USD")
+print(f"{mwk_amount} MWK is approximately {usd_amount} USD")
+  </code></pre>
+
+  <h4 class="font-semibold mt-6">AgriInfoMW Class</h4>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>from mw_info.agriculture_info import AgricultureInfoMW
+
+agri = AgricultureInfoMW()
+crop = agri.query_info("Chimanga")
+print(crop)
+  </code></pre>
+
+  <h4 class="font-semibold mt-6">HealthInfoMW Class</h4>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>from mw_info.health import HealthInfoMW
+
+health = HealthInfoMW()
+print(health.get_all_districts())
+print(health.get_district_health("Zomba"))
+  </code></pre>
+
+  <h4 class="font-semibold mt-6">DemographicsInfoMW Class</h4>
+  <pre class="bg-gray-100 dark:bg-gray-800 p-4 rounded overflow-auto whitespace-pre-wrap"><code>from mw_info.demographics import DemographicsInfoMW
+
+demo = DemographicsInfoMW()
+print(demo.get_all_districts())
+print(demo.get_population_total("Lilongwe"))
+print(demo.get_urban_rural_split("Blantyre"))
+print(demo.get_district_data("Zomba", fields=["population", "urban_percent"]))
+  </code></pre>
+
+  <h3 class="mt-8 mb-2">Data Source</h3>
+  <p>All the data is ChatGPT-generated.</p>
+
+  <h3 class="mt-8 mb-2">Maintainer</h3>
+  <p>Tuntufye Mwanyongo</p>
+
+  <p class="mt-6">
+    🔗 <a href="https://pypi.org/project/mw-info/" target="_blank" class="text-blue-600 dark:text-blue-400 underline font-medium">View on PyPI</a>
+  </p>
+</section>
+   

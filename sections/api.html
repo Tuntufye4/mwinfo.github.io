@@ -1,0 +1,37 @@
+<section>
+  <h2 class="text-3xl font-bold text-blue-700 dark:text-blue-300 mb-6">Malawi Info API</h2>
+
+  <div class="mb-10 max-w-full">
+    <h3 class="text-2xl font-semibold mb-4">Interactive Test</h3>
+    <label class="block mb-2" for="endpoint">Endpoint:</label>
+    <input id="endpoint" type="text" value="https://mw-info-api-5.onrender.com/api/mwinfo/districts/" class="w-full mb-4 p-2 border rounded bg-white dark:bg-gray-800">
+    <button id="runBtn" class="px-4 py-2 bg-blue-600 text-white rounded">Run</button>
+    <button id="copyBtn" class="px-4 py-2 bg-gray-500 text-white rounded ml-2">Copy</button>
+    <pre id="response" class="mt-4 p-4 bg-gray-100 dark:bg-gray-800 rounded whitespace-pre-wrap overflow-auto text-sm"></pre>
+  </div>
+
+  <div class="space-y-6 max-w-full">
+    <section>
+      <h3 class="text-2xl font-semibold text-green-700 mb-2">Districts</h3>
+      <ul class="list-disc list-inside">
+        <li><code class="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1">GET /api/mwinfo/districts/</code></li>
+        <li><code class="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1">GET /api/mwinfo/districts/Lilongwe/</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold text-yellow-600 mb-2">Agriculture</h3>
+      <ul class="list-disc list-inside">
+        <li><code class="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1">GET /api/agriinfo/query/?name=Nsima</code></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="text-2xl font-semibold text-indigo-700 mb-2">Currency Exchange</h3>
+      <ul class="list-disc list-inside">
+        <li><code class="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1">GET /api/currency/to_foreign/?amount=10000&amp;currency=USD</code></li>
+        <li><code class="bg-gray-200 dark:bg-gray-700 rounded px-2 py-1">GET /api/currency/to_mwk/?amount=100&amp;currency=GBP</code></li>
+      </ul>
+    </section>
+  </div>
+</section>
