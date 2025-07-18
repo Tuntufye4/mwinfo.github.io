@@ -4,21 +4,52 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Malawi Info</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>  
   <link rel="stylesheet" href="assets/style.css" />
+  <style>
+    .ball {
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: black;
+      margin: 0 0.5rem;
+      animation: bounce 0.8s infinite ease-in-out;
+    }
+
+    .ball:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .ball:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      40% {
+        transform: translateY(-1rem) scale(1.2);
+      }
+    }
+  </style>
 </head>
 <body class="font-sans antialiased bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200 transition-colors">
 
   <!-- Splash Screen -->
   <div id="splashScreen" class="splash-screen">
     <div class="text-center perspective-3d">
-      <h1 class="text-6xl font-extrabold tracking-widest text-black">INFO-MW</h1>
-      <p class="mt-4 text-lg text-gray-600">Loading...</p>
+      <h1 class="text-5xl font-extrabold tracking-widest text-black mb-6">INFO-MW</h1>
+      <div class="flex justify-center items-center">
+        <div class="ball"></div>
+        <div class="ball"></div>
+        <div class="ball"></div>
+      </div>
     </div>
   </div>
 
-  <!-- Header (Now Gray) -->
-  <header class="bg-gray-800 text-white px-6 py-4">
+  <!-- Header Bar (light gray) -->
+  <header class="bg-gray-300 text-gray-900 px-6 py-4 shadow-sm">
     <div class="max-w-4xl mx-auto flex justify-between items-center">
       <h1 class="text-2xl font-bold">Malawi Info</h1>
       <nav class="space-x-4">
@@ -31,10 +62,10 @@
 
   <!-- Main Content -->
   <main id="mainContent" class="max-w-4xl mx-auto px-4 py-10 space-y-16 min-h-[60vh]">
-    <!-- Section content loads here -->
+    <!-- Dynamic content loads here -->
   </main>
 
-  <!-- Dark Mode Toggle Below Main -->
+  <!-- Dark Mode Toggle Below Content -->
   <div class="text-center mb-6">
     <button id="themeToggle" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded">
       Toggle Dark Mode
