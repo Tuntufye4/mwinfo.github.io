@@ -89,7 +89,7 @@
       <p>Built & maintained by <strong>Tuntufye Mwanyongo</strong></p>
       <a href="mailto:tuntufye@gmail.com" class="text-blue-500 dark:text-blue-300 underline">📧 Email</a>
       <a href="https://github.com/Tuntufye4" target="_blank" class="inline-flex items-center ml-4 text-gray-700 dark:text-gray-300 hover:text-black">
-        <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="..."/></svg> GitHub
+        <svg class="w-5 h-5 mr-1 fill-current" viewBox="0 0 24 24"><path d="..." /></svg> GitHub
       </a>
     </footer>
   </div>
@@ -106,7 +106,15 @@
       const url = endpointInput.value;
       try {
         responseEl.textContent = 'Loading...';
-        const res = await fetch(url);
+        const res = await fetch(url, {
+          method: 'GET',
+          mode: 'cors'
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+        }
+
         const contentType = res.headers.get("content-type");
         if (contentType && contentType.includes("application/json")) {
           const data = await res.json();
@@ -115,8 +123,10 @@
           const text = await res.text();
           responseEl.textContent = text;
         }
+
       } catch (e) {
-        responseEl.textContent = 'Error: ' + e;
+        console.error(e);
+        responseEl.textContent = 'Fetch Error: ' + e.message;
       }
     });
 
@@ -141,7 +151,7 @@
       setTimeout(() => {
         const splash = document.getElementById('splashScreen');
         splash.classList.add('animate-fade-out');
-      }, 6000);
+      }, 2000);
     });
   </script>
 </body>
