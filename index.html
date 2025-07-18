@@ -7,11 +7,40 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
-      darkMode: ['class'],
-    } 
+      darkMode: ['class'],    
+      theme: {
+        extend: {
+          animation: {
+            'spin-slow': 'spin 6s linear infinite',
+            'fade-out': 'fadeOut 1s ease-in-out forwards'
+          },
+          keyframes: {
+            fadeOut: {
+              '0%': { opacity: '1' },
+              '100%': { opacity: '0', visibility: 'hidden' }
+            }
+          }
+        }
+      }
+    }
   </script>
+  <style>
+    .rotate-y-3d {
+      transform: perspective(800px) rotateY(25deg);
+    }
+  </style>
 </head>
 <body class="font-sans antialiased bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors">
+
+  <!-- Splash Screen -->
+  <div id="splashScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-blue-700 via-purple-700 to-pink-700 text-white">
+    <div class="text-center animate-spin-slow">
+      <h1 class="text-5xl font-bold rotate-y-3d">🌍 Malawi Info API</h1>
+      <p class="mt-4 text-lg">Loading Malawi insights...</p>
+    </div>
+  </div>
+
+  <!-- Main Content -->
   <div class="max-w-4xl mx-auto px-4 py-10">
     <div class="flex justify-between items-center mb-6">
       <h1 class="text-4xl font-bold text-blue-700 dark:text-blue-300">Malawi Info API</h1>
@@ -66,6 +95,7 @@
     </footer>
   </div>
 
+  <!-- JS -->
   <script>
     const runBtn = document.getElementById('runBtn');
     const copyBtn = document.getElementById('copyBtn');
@@ -78,22 +108,41 @@
       try {
         responseEl.textContent = 'Loading...';
         const res = await fetch(url);
-        const data = await res.json();
-        responseEl.textContent = JSON.stringify(data, null, 2);
+        const contentType = res.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+          const data = await res.json();
+          responseEl.textContent = JSON.stringify(data, null, 2);
+        } else {
+          const text = await res.text();
+          responseEl.textContent = text;
+        }
       } catch (e) {
         responseEl.textContent = 'Error: ' + e;
       }
     });
 
-    copyBtn.addEventListener('click', () => {
-      endpointInput.select();
-      document.execCommand('copy');
-      alert('Copied!');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(endpointInput.value);
+        alert('Copied!');
+      } catch (err) {
+        alert('Failed to copy');
+      }
     });
 
     themeBtn.addEventListener('click', () => {
       document.documentElement.classList.toggle('dark');
       document.documentElement.classList.toggle('light');
+      localStorage.setItem('theme',
+        document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+      );
+    });
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const splash = document.getElementById('splashScreen');
+        splash.classList.add('animate-fade-out');
+      }, 2500);
     });
   </script>
 </body>
